@@ -38,20 +38,22 @@ view('index')
   .on('click', '#clear-completed', clearCompleted)
   .on('click', '#toggle-all', toggleAllComplete);
 
-view('todo');
-
-model('todo')
-  .on('create', create)
-  //.on('reset')
-  //.on('change')
-  //.on('filter')
-  //.on('all')
+view('todo')
+  .on('create', function(){
+    this.model
+      .on('create', create)
+      //.on('reset')
+      //.on('change')
+      //.on('filter')
+      //.on('all')
+  });
 
 function create(todo) {
   view('todo'); //...
 }
 
 // https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/app.js
+// https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/todos.js
 function createOnEnter(e) {
   //if (e.which !== ENTER_KEY || !this.$input.val().trim()) {
   //  return;
