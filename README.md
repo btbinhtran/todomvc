@@ -1,6 +1,11 @@
 # Tower.js TodoMVC
 
-https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/component.json
+## Development
+
+```
+component install -d
+component build -d
+```
 
 ## Licence
 

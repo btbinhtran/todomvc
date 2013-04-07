@@ -2,7 +2,9 @@
   "name": "todomvc-tower",
   "version": "0.0.0",
   "dependencies": {
-    "tower-router": "*",
-    "todomvc-common": "~0.1.2"
+    "tower/client-router": "*",
+    "tower/model": "*",
+    "tower/view": "*",
+    "tastejs/todomvc-common": "*"
   }
 }

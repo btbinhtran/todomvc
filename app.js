@@ -73,3 +73,5 @@ function toggleAllComplete() {
 
   model('todo').save({ completed: completed });
 }
+
+console.log(model('todo'))
