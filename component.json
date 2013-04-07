@@ -1,10 +1,17 @@
 {
-  "name": "todomvc-tower",
+  "name": "tower-todomvc",
   "version": "0.0.0",
   "dependencies": {
     "tower/client-router": "*",
     "tower/model": "*",
     "tower/view": "*",
+    "tower/route": "*",
     "tastejs/todomvc-common": "*"
-  }
+  },
+  "scripts": [
+    "app.js"
+  ],
+  "main": [
+    "app.js"
+  ]
 }
