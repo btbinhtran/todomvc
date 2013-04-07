@@ -5,9 +5,8 @@
 
 var model = require('tower-model')
   , view = require('tower-view')
-  //, router = require('tower-router')
-  //, route = router.route;
-  , route = require('tower-route');
+  , router = require('tower-router')
+  , route = router.route;
 
 /**
  * Models.
@@ -27,6 +26,7 @@ model('todo')
 
 route('/:filter')
   .on('request', function(context){
+    console.log(context);
     // toggle: completed: !this.get('completed')
   });
 
@@ -75,4 +75,4 @@ function toggleAllComplete() {
   model('todo').save({ completed: completed });
 }
 
-console.log(model('todo'))
+router.start();
