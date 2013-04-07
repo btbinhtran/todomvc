@@ -76,3 +76,6 @@ function toggleAllComplete() {
 }
 
 router.start();
+
+exports.router = router;
+exports.model = model;
