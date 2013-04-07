@@ -5,8 +5,9 @@
 
 var model = require('tower-model')
   , view = require('tower-view')
-  , router = require('tower-router')
-  , route = router.route;
+  //, router = require('tower-router')
+  //, route = router.route;
+  , route = require('tower-route');
 
 /**
  * Models.

@@ -5,6 +5,7 @@
   "dependencies": {
     "tower-model": "*",
     "tower-view": "*",
-    "tower-router": "*"
+    "tower-router": "*",
+    "tower-app": "*"
   }
 }
