@@ -34,7 +34,7 @@ route('/:filter')
  * Views.
  */
 
-view('index')
+view('index', '#todoapp')
   .on('keypress', '#new-todo', createOnEnter)
   .on('click', '#clear-completed', clearCompleted)
   .on('click', '#toggle-all', toggleAllComplete);
@@ -56,12 +56,7 @@ function create(todo) {
 // https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/app.js
 // https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/todos.js
 function createOnEnter(e) {
-  //if (e.which !== ENTER_KEY || !this.$input.val().trim()) {
-  //  return;
-  //}
-  //
-  //model('todo').create(this.newAttributes());
-  // this.$input.val('');
+  
 }
 
 function clearCompleted() {
@@ -79,3 +74,4 @@ router.start();
 
 exports.router = router;
 exports.model = model;
+exports.view = view;
