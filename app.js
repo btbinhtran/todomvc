@@ -10,7 +10,11 @@ var router = require('tower-router')
 
 model('todo')
   .attr('title')
-  .attr('completed', 'boolean', false);
+  .attr('completed', 'boolean', false)
+  //.query('completed')
+  //  .where('completed').eq(true);
+  //.query('remaining')
+  //  .where('completed').eq(false);
 
 route('/:filter')
   .on('request', function(context){
