@@ -3,11 +3,14 @@
  * Module dependencies.
  */
 
-var router = require('tower-router')
-  , route = require('tower-route')
-  , model = require('tower-model')
-  , graph = require('tower-graph')
-  , view = require('tower-view');
+var model = require('tower-model')
+  , view = require('tower-view')
+  , router = require('tower-router')
+  , route = router.route;
+
+/**
+ * Models.
+ */
 
 model('todo')
   .attr('title')
@@ -17,15 +20,36 @@ model('todo')
   //.scope('remaining')
   //  .where('completed').eq(false);
 
+/**
+ * Routes.
+ */
+
 route('/:filter')
   .on('request', function(context){
     // toggle: completed: !this.get('completed')
   });
 
+/**
+ * Views.
+ */
+
 view('index')
   .on('keypress', '#new-todo', createOnEnter)
   .on('click', '#clear-completed', clearCompleted)
-  .on('click', '#toggle-all', toggleAllComplete)
+  .on('click', '#toggle-all', toggleAllComplete);
+
+view('todo');
+
+model('todo')
+  .on('create', create)
+  //.on('reset')
+  //.on('change')
+  //.on('filter')
+  //.on('all')
+
+function create(todo) {
+  view('todo'); //...
+}
 
 // https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/app.js
 function createOnEnter(e) {
