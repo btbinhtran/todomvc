@@ -34,7 +34,11 @@ route('/:filter')
  * Views.
  */
 
-view('index', '#todoapp')
+view(document)
+  .child('todos');
+
+view('todos', '#todoapp')
+  .child('todo')
   .on('keypress', '#new-todo', createOnEnter)
   .on('click', '#clear-completed', clearCompleted)
   .on('click', '#toggle-all', toggleAllComplete);
@@ -75,3 +79,5 @@ router.start();
 exports.router = router;
 exports.model = model;
 exports.view = view;
+
+console.log(view)
