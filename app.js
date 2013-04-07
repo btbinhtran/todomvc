@@ -6,7 +6,8 @@
 var model = require('tower-model')
   , view = require('tower-view')
   , router = require('tower-router')
-  , route = router.route;
+  , route = router.route
+  , noop = console.log;
 
 /**
  * Models.
@@ -42,6 +43,8 @@ view('todos', '#todoapp')
   .on('keypress', '#new-todo', createOnEnter)
   .on('click', '#clear-completed', clearCompleted)
   .on('click', '#toggle-all', toggleAllComplete);
+  // .on('toggle-complete', noop)
+  // .on('clear-completed', noop)
 
 view('todo')
   .on('create', function(){
@@ -51,7 +54,9 @@ view('todo')
       //.on('change')
       //.on('filter')
       //.on('all')
-  });
+  })
+  .on('remove', noop)
+  .on('click', '#toggle-edit', noop)
 
 function create(todo) {
   view('todo'); //...
