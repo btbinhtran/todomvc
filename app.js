@@ -5,9 +5,13 @@
 
 var model = require('tower-model')
   , view = require('tower-view')
+  , adapter = require('tower-adapter')
+  , query = require('tower-query')
   , router = require('tower-router')
   , route = router.route
   , noop = console.log;
+
+require('tower-memory-adapter');
 
 /**
  * Models.
@@ -16,9 +20,9 @@ var model = require('tower-model')
 model('todo')
   .attr('title')
   .attr('completed', 'boolean', false)
-  //.scope('completed')
-  //  .where('completed').eq(true);
-  //.scope('remaining')
+  .query('completed')
+    .where('completed').eq(true)
+  //.query('remaining')
   //  .where('completed').eq(false);
 
 /**
@@ -27,7 +31,7 @@ model('todo')
 
 route('/:filter')
   .on('request', function(context){
-    console.log(context);
+    alert(context.path);
     // toggle: completed: !this.get('completed')
   });
 
@@ -35,7 +39,7 @@ route('/:filter')
  * Views.
  */
 
-view(document)
+view('body')
   .child('todos');
 
 view('todos', '#todoapp')
@@ -47,7 +51,7 @@ view('todos', '#todoapp')
   // .on('clear-completed', noop)
 
 view('todo')
-  .on('create', function(){
+  .on('create', function(x){
     this.model
       .on('create', create)
       //.on('reset')
@@ -84,5 +88,6 @@ router.start();
 exports.router = router;
 exports.model = model;
 exports.view = view;
-
-console.log(view)
+exports.query = query;
+exports.adapter = adapter;
+// query().start('todo').use('memory').action('save', [{}]).execute();

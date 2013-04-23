@@ -5,8 +5,13 @@
     "tower/client-router": "*",
     "tower/model": "*",
     "tower/view": "*",
-    "tower/route": "*",
-    "tastejs/todomvc-common": "*"
+    "tower/emitter": "*",
+    "tower/stream": "*",
+    "tower/query": "*",
+    "tower/topology": "*",
+    "tower/adapter": "*",
+    "tower/client-view": "*",
+    "tower/memory-adapter": "*"
   },
   "scripts": [
     "app.js"
