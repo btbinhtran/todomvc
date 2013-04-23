@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "main": "./index.js",
   "dependencies": {
-    "tower-model": "*",
-    "tower-view": "*",
     "tower-router": "*",
-    "tower-app": "*"
+    "tower-model": "*",
+    "tower-emitter": "*",
+    "tower-stream": "*",
+    "tower-query": "*",
+    "tower-topology": "*",
+    "tower-adapter": "*",
+    "tower-view": "*",
+    "tower-memory-adapter": "*"
   }
 }
