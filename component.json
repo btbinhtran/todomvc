@@ -4,7 +4,6 @@
   "dependencies": {
     "tower/client-router": "*",
     "tower/model": "*",
-    "tower/view": "*",
     "tower/emitter": "*",
     "tower/stream": "*",
     "tower/query": "*",
