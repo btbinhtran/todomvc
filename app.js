@@ -69,7 +69,7 @@ function create(todo) {
 // https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/app.js
 // https://github.com/addyosmani/todomvc/blob/gh-pages/architecture-examples/backbone/js/views/todos.js
 function createOnEnter(e) {
-  
+
 }
 
 function clearCompleted() {
