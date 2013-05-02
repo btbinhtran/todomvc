@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "tower/client-router": "*",
+    "tower-route": "*",
     "tower/model": "*",
     "tower/emitter": "*",
     "tower/stream": "*",
@@ -13,9 +14,9 @@
     "tower/memory-adapter": "*"
   },
   "scripts": [
-    "app.js"
+    "index.js"
   ],
   "main": [
-    "app.js"
+    "index.js"
   ]
 }

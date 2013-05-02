@@ -4,6 +4,7 @@
   "main": "./index.js",
   "dependencies": {
     "tower-router": "*",
+    "tower-route": "*",
     "tower-model": "*",
     "tower-emitter": "*",
     "tower-stream": "*",
