@@ -14,19 +14,19 @@ var model = require('tower-model')
 require('tower-memory-adapter');
 
 /**
- * Models.
+ * Models
  */
 
 model('todo')
   .attr('title')
   .attr('completed', 'boolean', false)
-  .query('completed')
-    .where('completed').eq(true)
+  .query('completed') // query('todo.completed')
+    .where('completed').eq(true);
   //.query('remaining')
   //  .where('completed').eq(false);
 
 /**
- * Routes.
+ * Routes
  */
 
 route('/:filter')
@@ -36,13 +36,13 @@ route('/:filter')
   });
 
 /**
- * Views.
+ * Views
  */
 
 view('body')
   .child('todos');
 
-view('todos', '#todoapp')
+view('todos', '#todoapp') // XXX: dispatcher is `#todoapp`
   .child('todo')
   .on('keypress', '#new-todo', createOnEnter)
   .on('click', '#clear-completed', clearCompleted)
@@ -60,6 +60,8 @@ view('todo')
       //.on('all')
   })
   .on('remove', noop)
+  // on(event, selector, fn)
+  // on(event, selector, dispatcher, fn)
   .on('click', '#toggle-edit', noop)
 
 function create(todo) {
