@@ -51,9 +51,9 @@ view('todos', '#todoapp') // XXX: dispatcher is `#todoapp`
   // .on('clear-completed', noop)
 
 view('todo')
-  .on('create', function(x){
-    this.model
-      .on('create', create)
+  .on('render', function(x){
+    //this.model
+    //  .on('create', create) // XXX: need to impl
       //.on('reset')
       //.on('change')
       //.on('filter')
