@@ -101,7 +101,6 @@ fn(scopes.root());
  */
 
 function newTodo(event) {
-  if (!enterKey(event)) return;
   var title = $(event.target).val();
   $(event.target).val('');
   // callback b/c adapters can be async (AJAX, sockets, etc.)
@@ -142,11 +141,3 @@ function toggleCompleted() {
 }
 
 router.start();
-
-function which(event) {
-  return event.which || event.keyCode;
-}
-
-function enterKey(event) {
-  return 13 === which(event);
-}
