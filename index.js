@@ -63,13 +63,13 @@ directive('data-each', function(scope, element, attr){
 
   // e.g. todos
   var array = scope.get(prop);
-  var templateFn = template(element);
+  var fn = template(element);
   var parent = element.parentNode;
   parent.removeChild(element);
 
   scope.on('change ' + prop, function(){
-    var childScope = scopes('todo').init();
-    var childElement = templateFn.clone(childScope);
+    var childScope = scopes('todo').init({ parent: scope });
+    var childElement = fn.clone(childScope);
     parent.appendChild(childElement);
   });
 });
