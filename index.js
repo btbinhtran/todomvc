@@ -29,6 +29,13 @@ model('todo')
  * Routes.
  */
 
+route('/completed')
+  .on('request', function(context){
+    alert('!')
+    scopes('body').set('todos', []);
+  });
+
+// XXX: is executing even if first is matched
 route('/:filter')
   .on('request', function(context){
     alert(context.path);
