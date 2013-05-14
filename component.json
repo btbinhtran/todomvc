@@ -5,12 +5,10 @@
     "tower/client-router": "*",
     "tower-route": "*",
     "tower/model": "*",
-    "tower/emitter": "*",
-    "tower/stream": "*",
     "tower/query": "*",
-    "tower/topology": "*",
-    "tower/adapter": "*",
-    "tower/client-view": "*",
+    "tower/template": "*",
+    "tower/scope": "*",
+    "tower/template": "*",
     "tower/memory-adapter": "*"
   },
   "scripts": [

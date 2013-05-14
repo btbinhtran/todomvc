@@ -4,26 +4,26 @@
  */
 
 var model = require('tower-model')
-  , view = require('tower-view')
-  , adapter = require('tower-adapter')
   , query = require('tower-query')
   , router = require('tower-router')
-  , route = require('tower-route');
+  , route = require('tower-route')
+  , scope = require('tower-scope')
+  , template = require('tower-template');
 
 /**
- * Models
+ * Models.
  */
 
 model('todo')
   .attr('title')
   .attr('completed', 'boolean', false)
-  .query('completed') // query('todo.completed')
+  .query('completed')
     .where('completed').eq(true)
   .query('remaining')
     .where('completed').eq(false);
 
 /**
- * Routes
+ * Routes.
  */
 
 route('/:filter')
@@ -33,47 +33,48 @@ route('/:filter')
   });
 
 /**
- * Views
+ * Scopes.
  */
 
-view('body')
-  .child('todos');
+scope('body')
+  .action('newTodo', newTodo)
+  .action('clearCompleted', clearCompleted)
+  .action('toggleCompleted', toggleCompleted)
+  .action('removeTodo', removeTodo);
 
-view('todos', '#todoapp')
-  .child('todo')
-  .on('keypress', '#new-todo', create)
-  .on('click', '#clear-completed', clear)
-  .on('click', '#toggle-all', toggle);
-  // .on('toggle-complete', noop)
-  // .on('clear-completed', noop)
+/**
+ * Templates.
+ */
 
-view('todo')
-  .on('remove', remove)
-  // on(event, selector, fn)
-  // on(event, selector, dispatcher, fn)
-  //.on('click', '#toggle-edit', noop)
+var fn = template('body', document.body);
+fn(scope.root());
 
 /**
  * Create a new `todo`.
  */
 
-function create(todo) {
-  view('todo').render(todo).prepend();
+function newTodo(event) {
+  if (!enterKey(event)) return;
+  var title = $(event.target).val();
+  // callback b/c adapters can be async (AJAX, sockets, etc.)
+  model('todo').create({ title: title }, function(err, todo){
+    scope('body').emit('change todos');
+  });
 }
 
 /**
  * Remove an existing `todo`.
  */
 
-function remove(context) {
-
+function removeTodo(context) {
+  console.log('removeTodo');
 }
 
 /**
  * Clear all completed todos.
  */
 
-function clear() {
+function clearCompleted() {
   // view('todo').remove();
   model('todo').query('completed').remove();
   return false;
@@ -83,11 +84,18 @@ function clear() {
  * Toggle completed todos.
  */
 
-function toggle() {
+function toggleCompleted() {
   var completed = this.allCheckbox.checked;
 
   model('todo').save({ completed: completed });
 }
 
 router.start();
-if ('undefined' != typeof window) view.init();
+
+function which(event) {
+  return event.which || event.keyCode;
+}
+
+function enterKey(event) {
+  return 13 === which(event);
+}

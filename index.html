@@ -7,25 +7,20 @@
   <link rel="stylesheet" href="public/base.css">
   <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
 </head>
-<body view='body'>
-
-
-  <!-- Main Section -->
-  <section id="todoapp" view='todos'>
+<body data-scope="body">
+  <section id="todoapp">
     <header id="header">
       <h1>todos</h1>
-      <input id="new-todo" placeholder="What needs to be done?" autofocus>
+      <input id="new-todo" on-keypress="newTodo" placeholder="What needs to be done?" autofocus>
     </header>
     <section id="main">
       <input id="toggle-all" type="checkbox">
       <label for="toggle-all">Mark all as complete</label>
       <ul id="todo-list">
         <li each="todo in todos">
-          <div class="view" view="todo">
-            <input class="toggle" type="checkbox" data-checked="todo.completed">
-            <label data-text="todo.title"></label>
-            <button class="destroy"></button>
-          </div>
+          <input class="toggle" type="checkbox" data-checked="todo.completed">
+          <label data-text="todo.title"></label>
+          <button class="destroy"></button>
           <input class="edit" data-value="todo.title">
         </li>
       </ul>
@@ -48,14 +43,10 @@
           <a href="#/completed">Completed</a>
         </li>
       </ul>
-
-      <div view="stats-completed">
+      <div>
         <button id="clear-completed">Clear completed (<span data-text="session.completed"></span>)</button>
       </div>
-
     </footer>
-
-
   </section>
 
 
