@@ -39,7 +39,7 @@ route('/:filter')
  */
 
 scopes('body')
-  .attr('todos', 'array', memory.collection('todo'))
+  .attr('todos', 'array', [])
   .action('newTodo', newTodo)
   .action('clearCompleted', clearCompleted)
   .action('toggleCompleted', toggleCompleted)
