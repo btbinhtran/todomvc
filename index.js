@@ -83,8 +83,14 @@ directive('data-each', function(scope, element, attr){
   });
 });
 
-directive('data-route', function(){
+directive('href', function(scope, element, attr){
+  if (element.getAttribute('href').charAt(0) !== '/') return;
 
+  $(element).on('click', function(e){
+    e.preventDefault();
+    router.dispatch(element.getAttribute('href'));
+    return false;
+  });
 });
 
 /**
