@@ -8,7 +8,7 @@
     "tower/query": "*",
     "tower/template": "*",
     "tower/scope": "*",
-    "tower/template": "*",
+    "tower/directive": "*",
     "tower/memory-adapter": "*"
   },
   "scripts": [
