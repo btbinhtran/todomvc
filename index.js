@@ -66,11 +66,18 @@ directive('data-each', function(scope, element, attr){
   var fn = template(element);
   var parent = element.parentNode;
   parent.removeChild(element);
+  var lastIndex = array.length ? array.length - 1 : 0;
 
-  scope.on('change ' + prop, function(){
-    var childScope = scopes('todo').init({ parent: scope });
-    var childElement = fn.clone(childScope);
-    parent.appendChild(childElement);
+  scope.on('change ' + prop, function(array){
+    for (var i = lastIndex, n = array.length; i < n; i++) {
+      var childScope = scopes('todo').init({
+          parent: scope
+        , todo: array[i].attrs
+      });
+      var childElement = fn.clone(childScope);
+      $(parent).prepend(childElement);
+    }
+    lastIndex = n;
   });
 });
 
@@ -88,10 +95,13 @@ fn(scopes.root());
 function newTodo(event) {
   if (!enterKey(event)) return;
   var title = $(event.target).val();
+  $(event.target).val('');
   // callback b/c adapters can be async (AJAX, sockets, etc.)
 
   model('todo').create({ title: title }, function(err, todo){
-    scopes('body').changed('todos');
+    model('todo').find(function(err, todos){
+      scopes('body').set('todos', todos);
+    });
   });
 }
 
