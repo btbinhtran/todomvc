@@ -73,6 +73,7 @@ directive('data-each', function(scope, element, attr){
       var childScope = scopes('todo').init({
           parent: scope
         , todo: array[i].attrs
+        , i: i
       });
       var childElement = fn.clone(childScope);
       $(parent).prepend(childElement);
@@ -94,7 +95,6 @@ fn(scopes.root());
 
 function newTodo(event) {
   if (!enterKey(event)) return;
-  console.log(event);
   var title = $(event.target).val();
   $(event.target).val('');
   // callback b/c adapters can be async (AJAX, sockets, etc.)
@@ -110,8 +110,8 @@ function newTodo(event) {
  * Remove an existing `todo`.
  */
 
-function removeTodo(todo) {
-  console.log('removeTodo', todo);
+function removeTodo(todo, i, event) {
+  console.log('removeTodo', todo, i, event);
 }
 
 /**

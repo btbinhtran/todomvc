@@ -20,7 +20,7 @@
         <li data-each="todo in todos">
           <input class="toggle" type="checkbox" data-checked="todo.completed">
           <label data-text="todo.title"></label>
-          <button on-click="remove(todo)" class="destroy"></button>
+          <button on-click="remove(todo, i, event)" class="destroy"></button>
           <input class="edit" data-value="todo.title">
         </li>
       </ul>
