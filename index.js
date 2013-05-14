@@ -10,7 +10,8 @@ var model = require('tower-model')
   , scopes = require('tower-scope')
   , template = require('tower-template')
   , memory = require('tower-memory-adapter')
-  , directive = require('tower-directive');
+  , directive = require('tower-directive')
+  , keyboard = require('tower-keyboard-directive');
 
 /**
  * Models.
@@ -81,6 +82,12 @@ directive('data-each', function(scope, element, attr){
     lastIndex = n;
   });
 });
+
+/**
+ * Keyboard directives.
+ */
+
+keyboard('enter');
 
 /**
  * Templates.
