@@ -93,8 +93,7 @@ keyboard('enter');
  * Templates.
  */
 
-var fn = template('body', document.body);
-fn(scopes.root());
+template(document.body)(scopes.root());
 
 /**
  * Create a new `todo`.
