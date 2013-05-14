@@ -43,7 +43,7 @@ scopes('body')
   .action('newTodo', newTodo)
   .action('clearCompleted', clearCompleted)
   .action('toggleCompleted', toggleCompleted)
-  .action('removeTodo', removeTodo);
+  .action('remove', removeTodo);
 
 /**
  * Custom directives.
@@ -94,6 +94,7 @@ fn(scopes.root());
 
 function newTodo(event) {
   if (!enterKey(event)) return;
+  console.log(event);
   var title = $(event.target).val();
   $(event.target).val('');
   // callback b/c adapters can be async (AJAX, sockets, etc.)
@@ -109,8 +110,8 @@ function newTodo(event) {
  * Remove an existing `todo`.
  */
 
-function removeTodo(context) {
-  console.log('removeTodo');
+function removeTodo(todo) {
+  console.log('removeTodo', todo);
 }
 
 /**
