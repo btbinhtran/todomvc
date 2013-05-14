@@ -7,7 +7,7 @@ var model = require('tower-model')
   , query = require('tower-query')
   , router = require('tower-router')
   , route = require('tower-route')
-  , scopes = require('tower-scope')
+  , scope = require('tower-scope')
   , template = require('tower-template')
   , memory = require('tower-memory-adapter')
   , directive = require('tower-directive')
@@ -32,7 +32,7 @@ model('todo')
 route('/completed')
   .on('request', function(context){
     alert('!')
-    scopes('body').set('todos', []);
+    scope('body').set('todos', []);
   });
 
 // XXX: is executing even if first is matched
@@ -46,7 +46,7 @@ route('/:filter')
  * Scopes.
  */
 
-scopes('body')
+scope('body')
   .attr('todos', 'array', [])
   .action('newTodo', newTodo)
   .action('clearCompleted', clearCompleted)
@@ -57,7 +57,7 @@ scopes('body')
  * Custom directives.
  */
 
-directive('data-each', function(scope, element, attr){
+directive('data-each', function(ctx, element, attr){
   var self = this;
   var val = attr.value.split(/ +/);
   element.removeAttribute('data-each');
@@ -70,16 +70,16 @@ directive('data-each', function(scope, element, attr){
   }
 
   // e.g. todos
-  var array = scope.get(prop);
+  var array = ctx.get(prop);
   var fn = template(element);
   var parent = element.parentNode;
   parent.removeChild(element);
   var lastIndex = array.length ? array.length - 1 : 0;
 
-  scope.on('change ' + prop, function(array){
+  ctx.on('change ' + prop, function(array){
     for (var i = lastIndex, n = array.length; i < n; i++) {
-      var childScope = scopes('todo').init({
-          parent: scope
+      var childScope = scope('todo').init({
+          parent: ctx
         , todo: array[i].attrs
         , i: i
       });
@@ -90,7 +90,7 @@ directive('data-each', function(scope, element, attr){
   });
 });
 
-directive('href', function(scope, element, attr){
+directive('href', function(ctx, element, attr){
   if (element.getAttribute('href').charAt(0) !== '/') return;
 
   $(element).on('click', function(e){
@@ -110,7 +110,7 @@ keyboard('enter');
  * Templates.
  */
 
-template(document.body)(scopes.root());
+template(document.body)(scope.root());
 
 /**
  * Create a new `todo`.
@@ -123,7 +123,7 @@ function newTodo(event) {
 
   model('todo').create({ title: title }, function(err, todo){
     model('todo').find(function(err, todos){
-      scopes('body').set('todos', todos);
+      scope('body').set('todos', todos);
     });
   });
 }
