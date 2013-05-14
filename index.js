@@ -83,6 +83,10 @@ directive('data-each', function(scope, element, attr){
   });
 });
 
+directive('data-route', function(){
+
+});
+
 /**
  * Keyboard directives.
  */
