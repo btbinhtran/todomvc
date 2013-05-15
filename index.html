@@ -17,7 +17,7 @@
       <input id="toggle-all" on-click="toggleCompleted(event)" type="checkbox">
       <label for="toggle-all">Mark all as complete</label>
       <ul id="todo-list">
-        <li data-each="todo in todos">
+        <li data-list="todo in todos">
           <input class="toggle" type="checkbox" data-checked="todo.completed">
           <label data-text="todo.title"></label>
           <button on-click="remove(todo, i, event)" class="destroy"></button>

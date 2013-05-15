@@ -67,10 +67,10 @@ scope('body')
  * Custom directives.
  */
 
-directive('data-each', function(ctx, element, attr){
+directive('data-list', function(ctx, element, attr){
   var self = this;
   var val = attr.value.split(/ +/);
-  element.removeAttribute('data-each');
+  element.removeAttribute('data-list');
 
   if (val.length > 1) {
     var name = val[0];
