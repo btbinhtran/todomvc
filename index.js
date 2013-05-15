@@ -32,10 +32,13 @@ model('todo')
 
 route('/:filter')
   .on('request', function(context){
-    alert(context.path);
-    model('todo').query('completed').all(function(err, records){
-      collection('todos').reset(records);
-    });
+    // alert(context.path);
+    // model('todo').query('completed').all(function(err, records){
+    model('todo').query()
+      .where('completed').eq('completed' === context.params.filter)
+      .all(function(err, records){
+        collection('todos').reset(records);
+      });
   });
 
 /**
@@ -78,6 +81,10 @@ directive('data-each', function(ctx, element, attr){
 
   //ctx.on('change ' + prop, function(array){
   data.on('add', function(records){
+    change(records);
+  });
+
+  function change(records) {
     for (var i = 0, n = records.length; i < n; i++) {
       records[i].attrs.id = ++id;
       var childScope = scope('todo').init({
@@ -89,7 +96,7 @@ directive('data-each', function(ctx, element, attr){
       elements[id] = childElement;
       $(parent).prepend(childElement);
     }
-  });
+  }
 
   data.on('remove', function(records){
     for (var i = 0, n = records.length; i < n; i++) {
@@ -101,8 +108,12 @@ directive('data-each', function(ctx, element, attr){
     }
   });
 
-  data.on('refresh', function(records){
-    console.log('refresh', records);
+  data.on('reset', function(records){
+    for (var key in elements) {
+      $(elements[key]).remove();
+      delete elements[key];
+    }
+    change(records);
   });
 });
 
@@ -137,7 +148,7 @@ function newTodo(event) {
   $(event.target).val('');
   // callback b/c adapters can be async (AJAX, sockets, etc.)
 
-  model('todo').create({ title: title }, function(err, todo){
+  model('todo').create({ title: title, completed: false }, function(err, todo){
     collection('todos').push(todo);
   });
 }
