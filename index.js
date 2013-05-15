@@ -30,16 +30,19 @@ model('todo')
  * Routes.
  */
 
-route('/:filter')
-  .on('request', function(context){
-    // alert(context.path);
-    // model('todo').query('completed').all(function(err, records){
-    model('todo').query()
-      .where('completed').eq('completed' === context.params.filter)
-      .all(function(err, records){
-        collection('todos').reset(records);
-      });
+route('/:filter', function(context){
+  model('todo').query()
+    .where('completed').eq('completed' === context.params.filter)
+    .all(function(err, records){
+      collection('todos').reset(records);
+    });
+});
+
+route('/', function(){
+  model('todo').all(function(err, records){
+    collection('todos').reset(records);
   });
+});
 
 /**
  * Scopes.
