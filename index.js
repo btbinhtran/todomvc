@@ -12,7 +12,8 @@ var model = require('tower-model')
   , memory = require('tower-memory-adapter')
   , directive = require('tower-directive')
   , keyboard = require('tower-keyboard-directive')
-  , collection = require('tower-collection');
+  , collection = require('tower-collection')
+  , text = require('tower-inflector');
 
 /**
  * Models.
@@ -50,6 +51,13 @@ route('/', function(){
 
 scope('body')
   .attr('todos', { type: 'array', value: collection('todos') })
+  .attr('completed', 'integer', 0)
+  .attr('remaining', 'integer', function(){
+    return collection('todos').length;
+  })
+  .attr('remainingText', function(){
+
+  }, 'remaining')
   .action('newTodo', newTodo)
   .action('clearCompleted', clearCompleted)
   .action('toggleCompleted', toggleCompleted)
@@ -180,10 +188,12 @@ function clearCompleted() {
  * Toggle completed todos.
  */
 
-function toggleCompleted() {
-  var completed = this.allCheckbox.checked;
+function toggleCompleted(event) {
+  var completed = $(event.target).is(':checked');
 
-  model('todo').save({ completed: completed });
+  model('todo').update({ completed: completed }, function(err, records){
+    console.log(records);
+  });
 }
 
 router.start();

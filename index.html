@@ -14,7 +14,7 @@
       <input id="new-todo" on-enter="newTodo(event)" placeholder="What needs to be done?" autofocus>
     </header>
     <section id="main">
-      <input id="toggle-all" type="checkbox">
+      <input id="toggle-all" on-click="toggleCompleted(event)" type="checkbox">
       <label for="toggle-all">Mark all as complete</label>
       <ul id="todo-list">
         <li data-each="todo in todos">
@@ -27,9 +27,9 @@
     </section>
     <footer id="footer">
       <span id="todo-count">
-        <strong data-text="session.remaining"></strong> <!-- 1,2,3,4 -->
-        <span data-text="session.remaining"></span> <!-- 1,2,3,4 -->
-        <span data-text="session.remainingText"></span> <!-- items vs item -->
+        <strong data-text="remaining"></strong> <!-- 1,2,3,4 -->
+        <span data-text="remaining"></span> <!-- 1,2,3,4 -->
+        <span data-text="remainingText"></span> <!-- items vs item -->
         left
       </span>
       <ul id="filters">
@@ -44,7 +44,7 @@
         </li>
       </ul>
       <div>
-        <button id="clear-completed">Clear completed (<span data-text="session.completed"></span>)</button>
+        <button id="clear-completed">Clear completed (<span data-text="completed"></span>)</button>
       </div>
     </footer>
   </section>

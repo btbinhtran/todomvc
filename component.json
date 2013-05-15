@@ -11,7 +11,8 @@
     "tower/directive": "*",
     "tower/memory-adapter": "*",
     "tower/keyboard-directive": "*",
-    "tower/collection": "*"
+    "tower/collection": "*",
+    "tower/inflector": "*"
   },
   "scripts": [
     "index.js"
