@@ -148,11 +148,6 @@ function newTodo(event) {
 
 function removeTodo(todo, i, event) {
   todo.remove(function(){
-    window.memory = memory;
-    window.model = model;
-    model('todo').query().all(function(err, records){
-      console.log(records.length);
-    });
     collection('todos').remove(todo);
   });
 }
