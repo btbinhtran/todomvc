@@ -78,22 +78,33 @@ directive('data-each', function(ctx, element, attr){
   var fn = template(element);
   var parent = element.parentNode;
   parent.removeChild(element);
+  var id = 0;
+  var elements = {};
 
   //ctx.on('change ' + prop, function(array){
   data.on('add', function(records){
     for (var i = 0, n = records.length; i < n; i++) {
+      records[i].attrs.id = ++id;
       var childScope = scope('todo').init({
           parent: ctx
         , todo: records[i].attrs
         , i: i
       });
       var childElement = fn.clone(childScope);
+      elements[id] = childElement;
       $(parent).prepend(childElement);
     }
   });
 
   data.on('remove', function(records){
-    console.log('removed', records);
+    console.log(records)
+    for (var i = 0, n = records.length; i < n; i++) {
+      var attrs = records[i].attrs;
+      if (elements[attrs.id]) {
+        $(elements[attrs.id]).remove(); 
+        delete elements[attrs.id];
+      }
+    }
   });
 });
 
@@ -129,7 +140,7 @@ function newTodo(event) {
   // callback b/c adapters can be async (AJAX, sockets, etc.)
 
   model('todo').create({ title: title }, function(err, todo){
-    collection('todos').push({ attrs: { title: title } });
+    collection('todos').push(todo);
   });
 }
 
