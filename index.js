@@ -31,7 +31,7 @@ model('todo')
  */
 
 route('/:filter', function(context){
-  model('todo').query()
+  model('todo')
     .where('completed').eq('completed' === context.params.filter)
     .all(function(err, records){
       collection('todos').reset(records);
