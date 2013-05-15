@@ -10,7 +10,8 @@
     "tower/scope": "*",
     "tower/directive": "*",
     "tower/memory-adapter": "*",
-    "tower/keyboard-directive": "*"
+    "tower/keyboard-directive": "*",
+    "tower/collection": "*"
   },
   "scripts": [
     "index.js"

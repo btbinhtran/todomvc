@@ -11,7 +11,8 @@ var model = require('tower-model')
   , template = require('tower-template')
   , memory = require('tower-memory-adapter')
   , directive = require('tower-directive')
-  , keyboard = require('tower-keyboard-directive');
+  , keyboard = require('tower-keyboard-directive')
+  , collection = require('tower-collection');
 
 /**
  * Models.
@@ -47,7 +48,7 @@ route('/:filter')
  */
 
 scope('body')
-  .attr('todos', 'array', [])
+  .attr('todos', { type: 'array', value: collection('todos') })
   .action('newTodo', newTodo)
   .action('clearCompleted', clearCompleted)
   .action('toggleCompleted', toggleCompleted)
@@ -70,23 +71,29 @@ directive('data-each', function(ctx, element, attr){
   }
 
   // e.g. todos
-  var array = ctx.get(prop);
+  var data = ctx.get(prop);
+  var array = data;
+  if (array instanceof collection.Collection)
+    array = array.toArray();
   var fn = template(element);
   var parent = element.parentNode;
   parent.removeChild(element);
-  var lastIndex = array.length ? array.length - 1 : 0;
 
-  ctx.on('change ' + prop, function(array){
-    for (var i = lastIndex, n = array.length; i < n; i++) {
+  //ctx.on('change ' + prop, function(array){
+  data.on('add', function(records){
+    for (var i = 0, n = records.length; i < n; i++) {
       var childScope = scope('todo').init({
           parent: ctx
-        , todo: array[i].attrs
+        , todo: records[i].attrs
         , i: i
       });
       var childElement = fn.clone(childScope);
       $(parent).prepend(childElement);
     }
-    lastIndex = n;
+  });
+
+  data.on('remove', function(records){
+    console.log('removed', records);
   });
 });
 
@@ -122,9 +129,7 @@ function newTodo(event) {
   // callback b/c adapters can be async (AJAX, sockets, etc.)
 
   model('todo').create({ title: title }, function(err, todo){
-    model('todo').find(function(err, todos){
-      scope('body').set('todos', todos);
-    });
+    collection('todos').push({ attrs: { title: title } });
   });
 }
 
@@ -133,7 +138,8 @@ function newTodo(event) {
  */
 
 function removeTodo(todo, i, event) {
-  console.log('removeTodo', todo, i, event);
+  // todo.remove();
+  collection('todos').remove(todo);
 }
 
 /**
