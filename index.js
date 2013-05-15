@@ -30,17 +30,12 @@ model('todo')
  * Routes.
  */
 
-route('/completed')
-  .on('request', function(context){
-    alert('!')
-    scope('body').set('todos', []);
-  });
-
-// XXX: is executing even if first is matched
 route('/:filter')
   .on('request', function(context){
     alert(context.path);
-    // toggle: completed: !this.get('completed')
+    model('todo').query('completed').all(function(err, records){
+      collection('todos').reset(records);
+    });
   });
 
 /**
@@ -106,6 +101,10 @@ directive('data-each', function(ctx, element, attr){
       }
     }
   });
+
+  data.on('refresh', function(records){
+    console.log('refresh', records);
+  });
 });
 
 directive('href', function(ctx, element, attr){
@@ -149,7 +148,6 @@ function newTodo(event) {
  */
 
 function removeTodo(todo, i, event) {
-  // todo.remove();
   collection('todos').remove(todo);
 }
 
