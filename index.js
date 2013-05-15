@@ -82,7 +82,7 @@ directive('data-each', function(ctx, element, attr){
       records[i].attrs.id = ++id;
       var childScope = scope('todo').init({
           parent: ctx
-        , todo: records[i].attrs
+        , todo: records[i]
         , i: i
       });
       var childElement = fn.clone(childScope);
@@ -92,7 +92,6 @@ directive('data-each', function(ctx, element, attr){
   });
 
   data.on('remove', function(records){
-    console.log(records)
     for (var i = 0, n = records.length; i < n; i++) {
       var attrs = records[i].attrs;
       if (elements[attrs.id]) {
@@ -148,7 +147,14 @@ function newTodo(event) {
  */
 
 function removeTodo(todo, i, event) {
-  collection('todos').remove(todo);
+  todo.remove(function(){
+    window.memory = memory;
+    window.model = model;
+    model('todo').query().all(function(err, records){
+      console.log(records.length);
+    });
+    collection('todos').remove(todo);
+  });
 }
 
 /**
