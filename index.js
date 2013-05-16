@@ -133,6 +133,20 @@ directive('href', function(ctx, element, attr){
   });
 });
 
+directive('data-checked', function(_scope, element, attr){
+  $(element).on('change', handle);
+
+  function handle(event) {
+    _scope.get('todo').set('completed', event.target.checked);
+    // XXX: doesn't handle nested
+    // _scope.set(attr.value, event.target.checked);
+  }
+
+  _scope.on('remove', function(){
+    $(element).off('change', handle);
+  });
+});
+
 /**
  * Keyboard directives.
  */
