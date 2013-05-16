@@ -183,11 +183,10 @@ function clearCompleted() {
  * Toggle completed todos.
  */
 
-function toggleCompleted(event) {
-  var completed = $(event.target).is(':checked');
-
+function toggleCompleted(completed) {
   model('todo').update({ completed: completed }, function(err, records){
-    console.log(records);
+    // XXX: for some reason duplicate records are being passed back.
+    collection('todos').reset(records);
   });
 }
 
