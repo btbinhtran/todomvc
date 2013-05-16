@@ -21,11 +21,7 @@ var model = require('tower-model')
 
 model('todo')
   .attr('title')
-  .attr('completed', 'boolean', false)
-  .query('completed')
-    .where('completed').eq(true)
-  .query('remaining')
-    .where('completed').eq(false);
+  .attr('completed', 'boolean', false);
 
 /**
  * Routes.
@@ -87,7 +83,6 @@ directive('data-list', function(ctx, element, attr){
   var fn = template(element);
   var parent = element.parentNode;
   parent.removeChild(element);
-  var id = 0;
   var elements = {};
 
   //ctx.on('change ' + prop, function(array){
@@ -97,11 +92,11 @@ directive('data-list', function(ctx, element, attr){
 
   function change(records) {
     for (var i = 0, n = records.length; i < n; i++) {
-      records[i].attrs.id = ++id;
+      var id = records[i].get('id');
       var childScope = scope('todo').init({
-          parent: ctx
-        , todo: records[i]
-        , i: i
+        parent: ctx,
+        todo: records[i],
+        i: i
       });
       var childElement = fn.clone(childScope);
       elements[id] = childElement;
@@ -111,10 +106,10 @@ directive('data-list', function(ctx, element, attr){
 
   data.on('remove', function(records){
     for (var i = 0, n = records.length; i < n; i++) {
-      var attrs = records[i].attrs;
-      if (elements[attrs.id]) {
-        $(elements[attrs.id]).remove(); 
-        delete elements[attrs.id];
+      var id = records[i].get('id');
+      if (elements[id]) {
+        $(elements[id]).remove(); 
+        delete elements[id];
       }
     }
   });
