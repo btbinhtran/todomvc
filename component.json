@@ -4,7 +4,7 @@
   "dependencies": {
     "tower/client-router": "*",
     "tower-route": "*",
-    "tower/model": "*",
+    "tower/resource": "*",
     "tower/template": "*",
     "tower/scope": "*",
     "tower/directive": "*",

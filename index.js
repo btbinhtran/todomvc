@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var resource = require('tower-model');
+var resource = require('tower-resource');
 var router = require('tower-router');
 var route = require('tower-route');
 var scope = require('tower-scope');
@@ -44,8 +44,9 @@ route('/:filter', function(context){
 });
 
 route('/', function(){
-  resource('todo').all(function(err, records){
+  resource('todo').all(function(err, records, query){
     collection('todos').reset(records);
+    // XXX: collection('todos').subscribe(query, records);
   });
 });
 
