@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var model = require('tower-model');
+var resource = require('tower-model');
 var query = require('tower-query');
 var router = require('tower-router');
 var route = require('tower-route');
@@ -19,7 +19,7 @@ var text = require('tower-text');
  * Models.
  */
 
-model('todo')
+resource('todo')
   .attr('title')
   .attr('completed', 'boolean', false);
 
@@ -28,7 +28,7 @@ model('todo')
  */
 
 route('/:filter', function(context){
-  model('todo')
+  resource('todo')
     .where('completed').eq('completed' === context.params.filter)
     .all(function(err, records){
       collection('todos').reset(records);
@@ -36,7 +36,7 @@ route('/:filter', function(context){
 });
 
 route('/', function(){
-  model('todo').all(function(err, records){
+  resource('todo').all(function(err, records){
     collection('todos').reset(records);
   });
 });
@@ -168,7 +168,7 @@ function newTodo(event) {
   $(event.target).val('');
   // callback b/c adapters can be async (AJAX, sockets, etc.)
 
-  model('todo').create({ title: title, completed: false }, function(err, todo){
+  resource('todo').create({ title: title, completed: false }, function(err, todo){
     collection('todos').push(todo);
   });
 }
@@ -189,7 +189,7 @@ function removeTodo(todo, i, event) {
 
 function clearCompleted() {
   // view('todo').remove();
-  model('todo').query('completed').remove();
+  resource('todo').query('completed').remove();
   return false;
 }
 
@@ -198,7 +198,7 @@ function clearCompleted() {
  */
 
 function toggleCompleted(completed) {
-  model('todo').update({ completed: completed }, function(err, records){
+  resource('todo').update({ completed: completed }, function(err, records){
     // XXX: for some reason duplicate records are being passed back.
     collection('todos').reset(records);
   });
