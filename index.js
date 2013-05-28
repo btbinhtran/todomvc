@@ -4,7 +4,6 @@
  */
 
 var resource = require('tower-model');
-var query = require('tower-query');
 var router = require('tower-router');
 var route = require('tower-route');
 var scope = require('tower-scope');

@@ -5,7 +5,6 @@
     "tower/client-router": "*",
     "tower-route": "*",
     "tower/model": "*",
-    "tower/query": "*",
     "tower/template": "*",
     "tower/scope": "*",
     "tower/directive": "*",
