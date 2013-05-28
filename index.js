@@ -3,17 +3,17 @@
  * Module dependencies.
  */
 
-var model = require('tower-model')
-  , query = require('tower-query')
-  , router = require('tower-router')
-  , route = require('tower-route')
-  , scope = require('tower-scope')
-  , template = require('tower-template')
-  , memory = require('tower-memory-adapter')
-  , directive = require('tower-directive')
-  , keyboard = require('tower-keyboard-directive')
-  , collection = require('tower-collection')
-  , text = require('tower-inflector');
+var model = require('tower-model');
+var query = require('tower-query');
+var router = require('tower-router');
+var route = require('tower-route');
+var scope = require('tower-scope');
+var template = require('tower-template');
+var memory = require('tower-memory-adapter');
+var directive = require('tower-directive');
+var keyboard = require('tower-keyboard-directive');
+var collection = require('tower-collection');
+var text = require('tower-text');
 
 /**
  * Models.

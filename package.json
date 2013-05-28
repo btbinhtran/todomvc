@@ -12,6 +12,7 @@
     "tower-topology": "*",
     "tower-adapter": "*",
     "tower-view": "*",
-    "tower-memory-adapter": "*"
+    "tower-memory-adapter": "*",
+    "tower-text": "*"
   }
 }
