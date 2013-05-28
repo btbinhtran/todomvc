@@ -16,7 +16,7 @@ var collection = require('tower-collection');
 var text = require('tower-text');
 
 /**
- * Models.
+ * Resources.
  */
 
 resource('todo')
@@ -24,10 +24,19 @@ resource('todo')
   .attr('completed', 'boolean', false);
 
 /**
+ * Collections.
+ */
+
+collection('todos');
+
+/**
  * Routes.
  */
 
 route('/:filter', function(context){
+  // XXX: collection('todos').subscribe(query)
+  // .unsubscribe on exit, or collection automatically
+  // unsubscribes if another is subscribed to.
   resource('todo')
     .where('completed').eq('completed' === context.params.filter)
     .all(function(err, records){
