@@ -12,7 +12,6 @@ var memory = require('tower-memory-adapter');
 var directive = require('tower-directive');
 var keyboard = require('tower-keyboard-directive');
 var collection = require('tower-collection');
-var text = require('tower-text');
 
 /**
  * Resources.

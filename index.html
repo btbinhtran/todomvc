@@ -1,58 +1,58 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Tower.js • TodoMVC</title>
-  <link rel="stylesheet" href="public/base.css">
-  <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-</head>
-<body data-scope="body">
-  <section id="todoapp">
-    <header id="header">
-      <h1>todos</h1>
-      <input id="new-todo" on-enter="newTodo(event)" placeholder="What needs to be done?" autofocus>
-    </header>
-    <section id="main">
-      <input id="toggle-all" on-change="toggleCompleted(event.target.checked)" type="checkbox">
-      <label for="toggle-all">Mark all as complete</label>
-      <ul id="todo-list">
-        <li data-list="todo in todos">
-          <input class="toggle" type="checkbox" data-checked="todo.completed">
-          <label data-text="todo.title"></label>
-          <button on-click="remove(todo, i, event)" class="destroy"></button>
-          <input class="edit" data-value="todo.title">
-        </li>
-      </ul>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tower.js • TodoMVC</title>
+    <link rel="stylesheet" href="public/base.css">
+    <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+  </head>
+  <body data-scope="body">
+    <section id="todoapp">
+      <header id="header">
+        <h1>todos</h1>
+        <input id="new-todo" on-enter="newTodo(event)" placeholder="What needs to be done?" autofocus>
+      </header>
+      <section id="main">
+        <input id="toggle-all" on-change="toggleCompleted(event.target.checked)" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">
+          <li data-list="todo in todos">
+            <input class="toggle" type="checkbox" data-checked="todo.completed">
+            <label data-text="todo.title"></label>
+            <button on-click="remove(todo, i, event)" class="destroy"></button>
+            <input class="edit" data-value="todo.title">
+          </li>
+        </ul>
+      </section>
+      <footer id="footer">
+        <span id="todo-count">
+          <strong data-text="remaining"></strong> <!-- 1,2,3,4 -->
+          <span data-text="remaining"></span> <!-- 1,2,3,4 -->
+          <span data-text="remainingText"></span> <!-- items vs item -->
+          left
+        </span>
+        <ul id="filters">
+          <li>
+            <a class="selected" href="/">All</a>
+          </li>
+          <li>
+            <a href="/active">Active</a>
+          </li>
+          <li>
+            <a href="/completed">Completed</a>
+          </li>
+        </ul>
+        <div>
+          <button id="clear-completed">Clear completed (<span data-text="completed"></span>)</button>
+        </div>
+      </footer>
     </section>
-    <footer id="footer">
-      <span id="todo-count">
-        <strong data-text="remaining"></strong> <!-- 1,2,3,4 -->
-        <span data-text="remaining"></span> <!-- 1,2,3,4 -->
-        <span data-text="remainingText"></span> <!-- items vs item -->
-        left
-      </span>
-      <ul id="filters">
-        <li>
-          <a class="selected" href="/">All</a>
-        </li>
-        <li>
-          <a href="/active">Active</a>
-        </li>
-        <li>
-          <a href="/completed">Completed</a>
-        </li>
-      </ul>
-      <div>
-        <button id="clear-completed">Clear completed (<span data-text="completed"></span>)</button>
-      </div>
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+      <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
     </footer>
-  </section>
-  <footer id="info">
-    <p>Double-click to edit a todo</p>
-    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-  </footer>
-  <script src="build/build.js"></script>
-  <script>require('tower-todomvc')</script>
-</body>
+    <script src="build/build.js"></script>
+    <script>require('tower-todomvc')</script>
+  </body>
 </html>

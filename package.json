@@ -5,14 +5,13 @@
   "dependencies": {
     "tower-router": "*",
     "tower-route": "*",
-    "tower-model": "*",
+    "tower-resource": "*",
     "tower-emitter": "*",
     "tower-stream": "*",
     "tower-query": "*",
     "tower-topology": "*",
     "tower-adapter": "*",
     "tower-view": "*",
-    "tower-memory-adapter": "*",
-    "tower-text": "*"
+    "tower-memory-adapter": "*"
   }
 }
