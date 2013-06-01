@@ -6,12 +6,11 @@
     "tower-route": "*",
     "tower/resource": "*",
     "tower/template": "*",
-    "tower/scope": "*",
+    "tower/content": "*",
     "tower/directive": "*",
     "tower/memory-adapter": "*",
     "tower/keyboard-directive": "*",
     "tower/collection": "*",
-    "tower/inflector": "*",
     "component/value": "*"
   },
   "scripts": [

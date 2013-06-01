@@ -6,7 +6,7 @@
 var resource = require('tower-resource');
 var router = require('tower-router');
 var route = require('tower-route');
-var scope = require('tower-scope');
+var content = require('tower-content');
 var template = require('tower-template');
 var memory = require('tower-memory-adapter');
 var directive = require('tower-directive');
@@ -53,7 +53,7 @@ route('/', function(){
  * Scopes.
  */
 
-scope('body')
+content('body')
   .attr('todos', { type: 'array', value: collection('todos') })
   .attr('completed', 'integer', 0)
   .attr('remaining', 'integer', function(){
@@ -101,7 +101,7 @@ directive('data-list', function(ctx, element, attr){
   function change(records) {
     for (var i = 0, n = records.length; i < n; i++) {
       var id = records[i].get('id');
-      var childScope = scope('todo').init({
+      var childScope = content('todo').init({
         parent: ctx,
         todo: records[i],
         i: i
@@ -165,7 +165,7 @@ keyboard('enter');
  * Templates.
  */
 
-template(document.body)(scope.root());
+template(document.body)(content.root());
 
 /**
  * Create a new `todo`.
