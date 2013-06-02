@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "tower/client-router": "*",
-    "tower-route": "*",
+    "tower/route": "*",
     "tower/resource": "*",
     "tower/template": "*",
     "tower/content": "*",

@@ -50,7 +50,7 @@ route('/', function(){
 });
 
 /**
- * Scopes.
+ * Content.
  */
 
 content('body')
